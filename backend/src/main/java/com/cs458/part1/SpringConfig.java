@@ -21,6 +21,8 @@ import lombok.RequiredArgsConstructor;
 public class SpringConfig {
     private final JwtAuthFilter jwtAuthFilter;
     private final UserDetailsService userDetailsService;
+    private final CustomAuthenticationEntryPoint customAuthenticationEntryPoint;
+    private final CustomAccessDeniedHandler customAccessDeniedHandler;
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -42,6 +44,10 @@ public class SpringConfig {
         .authorizeHttpRequests(auth -> auth
             .requestMatchers("/", "/api/login", "/user/getUserByEmail", "/oauth2/**").permitAll() // Allow login & OAuth2
             .anyRequest().authenticated() // Require authentication for all other requests
+        )
+        .exceptionHandling(ex -> ex
+            .authenticationEntryPoint(customAuthenticationEntryPoint)
+            .accessDeniedHandler(customAccessDeniedHandler)
         )
         .oauth2Login(Customizer.withDefaults()) // Enable Google OAuth2 login
         .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class) // Add JWT authentication filter
