@@ -31,12 +31,6 @@ public class UserController {
     
     @PostMapping("/createUser")
     public String insert(@RequestBody User user) {
-        // User user = new User();
-        // user.setEmail("ender@gmail.com");
-        // user.setName("Ender");
-        // user.setSurname("Utlu");
-        // user.setPhoneNumber("05448242002");
-        // user.setDateOfBirth(LocalDate.of(2002, 8, 1));
         return repo.save(user).toString();
     }
     
