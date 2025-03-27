@@ -26,5 +26,6 @@ public class Survey {
     Gender Gender;
     List<AIModel> AiModel;
     String UseCaseOfAi;
+    String EducationLevel;
 
 }
