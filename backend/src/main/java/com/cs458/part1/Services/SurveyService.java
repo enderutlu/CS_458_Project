@@ -42,7 +42,7 @@ public class SurveyService {
         body = body.concat("Gender: " + gender + "\n");
         body = body.concat("AI Models: " +"\n\n");
         for (AIModel aiModel : survey.getAiModel()) {
-            body = body.concat("\t" + survey.getAiModel().indexOf(aiModel) + "." + "\n");
+            body = body.concat("\t" + (survey.getAiModel().indexOf(aiModel) + 1) + "." + "\n");
             String aiType = FirstLetterUppercase(aiModel.getAiType().toString());
             body = body.concat("\t\t" + "AI Type: " + aiType +"\n");
             body = body.concat("\t\t" + "Description: " + aiModel.getDescription() +"\n");
