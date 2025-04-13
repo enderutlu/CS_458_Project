@@ -23,13 +23,13 @@ public class SurveyService {
     }
 
     @Transactional
-    public Survey createSurvey(Survey survey) {
-        Survey saved = surveyRepository.save(survey);
+    public String createSurvey(Survey survey) {
+        surveyRepository.save(survey);
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String email = ((User)auth.getPrincipal()).getEmail();
         String mailBody = CreateMailBody(survey);
         mailService.sendEmail(email, "Your Survey Results", mailBody);
-        return saved;
+        return mailBody;
     }
 
     private String CreateMailBody(Survey survey){
